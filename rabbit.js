@@ -1,7 +1,7 @@
 const amqp = require('amqplib/callback_api')
 
 function sendToCreateInstanceQueue(instanceId) {
-  amqp.connect('amqp://localhost', function(error0, connection) {
+  amqp.connect('amqp://localhost:10001', function(error0, connection) {
     if (error0) {
       throw error0
     }
