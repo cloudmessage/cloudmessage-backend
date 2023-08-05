@@ -14,21 +14,12 @@ const options = {
   }
 }
 
-const user = 'rabbituser1'
-const virtualHost = 'rabbitvh1'
-const password = 'secret'
-const hostname = 'some-hostname'
-
 const knex = require('knex')(options)
 
 app.post('/instances', async (req, res) => {
   const instanceName = req.body.instanceName
   const instance = {
-    name: instanceName,
-    user,
-    virtual_host: virtualHost,
-    password,
-    hostname
+    name: instanceName
   }
 
   // create a row in instances table
