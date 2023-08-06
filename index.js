@@ -44,6 +44,19 @@ app.get('/instances', async (req, res) => {
     .catch((err) => { console.log(err); throw err })
 })
 
+app.get('/instances/:inst_id', async (req, res) => {
+  knex('instances').select('id', 'name', 'user', 'virtual_host', 'password', 'hostname')
+    .where('id', req.params.inst_id)
+    .then((rows) => {
+      if (rows.length === 0) {
+        res.status(404).send({ msg: "Not found" })
+      }
+
+      res.send(rows[0])
+    })
+    .catch((err) => { console.log(err); throw err })
+})
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
 })
