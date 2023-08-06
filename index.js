@@ -33,7 +33,15 @@ app.post('/instances', async (req, res) => {
     })
     .catch((err) => { console.log(err); throw err })
 
+})
 
+app.get('/instances', async (req, res) => {
+  knex('instances').select('id', 'name')
+    .orderBy('id')
+    .then((rows) => {
+      res.send(rows)
+    })
+    .catch((err) => { console.log(err); throw err })
 })
 
 app.listen(port, () => {
