@@ -1,11 +1,13 @@
 const express = require('express')
 const app = express()
 require('dotenv').config()
+const cors = require('cors')
 const sendToCreateInstanceQueue = require('./rabbit')
 
 const port = 3000
 
 app.use(express.json())
+app.use(cors())
 
 const options = {
   client: 'sqlite3',
