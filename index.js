@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const { auth } = require('express-oauth2-jwt-bearer');
 require('dotenv').config()
 const cors = require('cors')
 const sendToCreateInstanceQueue = require('./rabbit')
@@ -19,7 +20,12 @@ const options = {
 
 const knex = require('knex')(options)
 
-app.post('/instances', async (req, res) => {
+const checkJwt = auth({
+  audience: 'https://cloudmessage.com',
+  issuerBaseURL: `https://cloudmessage.us.auth0.com/`,
+});
+
+app.post('/instances', checkJwt, async (req, res) => {
   const instanceName = req.body.instanceName
   const instance = {
     name: instanceName
@@ -38,7 +44,7 @@ app.post('/instances', async (req, res) => {
 
 })
 
-app.get('/instances', async (req, res) => {
+app.get('/instances', checkJwt, async (req, res) => {
   knex('instances').select('id', 'name')
     .orderBy('id')
     .then((rows) => {
@@ -47,7 +53,7 @@ app.get('/instances', async (req, res) => {
     .catch((err) => { console.log(err); throw err })
 })
 
-app.get('/instances/:inst_id', async (req, res) => {
+app.get('/instances/:inst_id', checkJwt, async (req, res) => {
   knex('instances').select('id', 'name', 'user', 'virtual_host', 'password', 'hostname')
     .where('id', req.params.inst_id)
     .then((rows) => {
