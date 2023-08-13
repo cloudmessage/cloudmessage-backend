@@ -3,6 +3,8 @@ const app = express()
 const { auth } = require('express-oauth2-jwt-bearer');
 require('dotenv').config()
 const cors = require('cors')
+const {expressjwt: jwt} = require('express-jwt');
+const jwksRsa = require('jwks-rsa');
 const sendToCreateInstanceQueue = require('./rabbit')
 
 const port = 3000
@@ -20,12 +22,31 @@ const options = {
 
 const knex = require('knex')(options)
 
-const checkJwt = auth({
-  audience: 'https://cloudmessage.com',
-  issuerBaseURL: `https://cloudmessage.us.auth0.com/`,
-});
+app.use(
+  jwt({
+    secret: jwksRsa.expressJwtSecret({
+      jwksUri: 'https://cloudmessage.us.auth0.com/.well-known/jwks.json',
+    }),
+    audience: 'https://cloudmessage.com',
+    issuerBaseURL: `https://cloudmessage.us.auth0.com/`,
+    algorithms: ['RS256'],
+    getToken: function fromHeaderOrQuerystring(req) {
+      if (
+        req.headers.authorization &&
+        req.headers.authorization.split(" ")[0] === "Bearer"
+      ) {
+        return req.headers.authorization.split(" ")[1];
+      } else if (req.query && req.query.token) {
+        return req.query.token;
+      }
+      return null;
+    },
+  })
+);
 
-app.post('/instances', checkJwt, async (req, res) => {
+
+app.post('/instances', async (req, res) => {
+console.log("Post:, req.headesrs=", req.headers)
   const instanceName = req.body.instanceName
   const instance = {
     name: instanceName
@@ -44,7 +65,7 @@ app.post('/instances', checkJwt, async (req, res) => {
 
 })
 
-app.get('/instances', checkJwt, async (req, res) => {
+app.get('/instances', async (req, res) => {
   knex('instances').select('id', 'name')
     .orderBy('id')
     .then((rows) => {
@@ -53,7 +74,7 @@ app.get('/instances', checkJwt, async (req, res) => {
     .catch((err) => { console.log(err); throw err })
 })
 
-app.get('/instances/:inst_id', checkJwt, async (req, res) => {
+app.get('/instances/:inst_id', async (req, res) => {
   knex('instances').select('id', 'name', 'user', 'virtual_host', 'password', 'hostname')
     .where('id', req.params.inst_id)
     .then((rows) => {
