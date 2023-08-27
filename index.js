@@ -9,6 +9,9 @@ const sendToCreateInstanceQueue = require('./rabbit')
 
 const port = 3000
 
+const AUTH0_AUDIENCE = process.env.AUTH0_AUDIENCE;
+const AUTH0_ISSUER_BASE_URL = process.env.AUTH0_ISSUER_BASE_URL;
+
 app.use(express.json())
 app.use(cors())
 
@@ -25,10 +28,10 @@ const knex = require('knex')(options)
 app.use(
   jwt({
     secret: jwksRsa.expressJwtSecret({
-      jwksUri: 'https://cloudmessage.us.auth0.com/.well-known/jwks.json',
+      jwksUri: `${AUTH0_ISSUER_BASE_URL}/.well-known/jwks.json`,
     }),
-    audience: 'https://cloudmessage.com',
-    issuerBaseURL: `https://cloudmessage.us.auth0.com/`,
+    audience: AUTH0_AUDIENCE,
+    issuerBaseURL: AUTH0_ISSUER_BASE_URL,
     algorithms: ['RS256'],
     getToken: function fromHeaderOrQuerystring(req) {
       if (
