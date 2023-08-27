@@ -46,7 +46,6 @@ app.use(
 
 
 app.post('/instances', async (req, res) => {
-console.log("Post:, req.headesrs=", req.headers)
   const instanceName = req.body.instanceName
   const instance = {
     name: instanceName
