@@ -25,6 +25,11 @@ const options = {
 
 const knex = require('knex')(options)
 
+app.get('/health', async (req, res) => {
+  res.status(200)
+  res.send("Backend is alive")
+})
+
 app.use(
   jwt({
     secret: jwksRsa.expressJwtSecret({
