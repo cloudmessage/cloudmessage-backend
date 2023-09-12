@@ -6,7 +6,7 @@ const cors = require('cors')
 const {expressjwt: jwt} = require('express-jwt');
 const jwksRsa = require('jwks-rsa');
 const sendToCreateInstanceQueue = require('./rabbit')
-
+const knexOptionsFile = require('./knexoptions')
 const port = 3000
 
 const AUTH0_AUDIENCE = process.env.AUTH0_AUDIENCE;
@@ -15,15 +15,9 @@ const AUTH0_ISSUER_BASE_URL = process.env.AUTH0_ISSUER_BASE_URL;
 app.use(express.json())
 app.use(cors())
 
-const options = {
-  client: 'sqlite3',
-  connection: {
-    filename: "./mydb.sqlite"
-  },
-  useNullAsDefault: true
-}
+const knexOptions = knexOptionsFile[process.env.NODE_ENV]
 
-const knex = require('knex')(options)
+const knex = require('knex')(knexOptions)
 
 app.get('/health', async (req, res) => {
   res.status(200)
