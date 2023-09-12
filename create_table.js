@@ -1,11 +1,8 @@
-const options = {
-  client: 'sqlite3',
-  connection: {
-    filename: "./mydb.sqlite"
-  }
-}
+require('dotenv').config()
+const knexOptionsFile = require('./knexoptions')
+const knexOptions = knexOptionsFile[process.env.NODE_ENV]
 
-const knex = require('knex')(options)
+const knex = require('knex')(knexOptions)
 
 knex.schema.createTable('instances', (table) => {
   table.increments('id')
