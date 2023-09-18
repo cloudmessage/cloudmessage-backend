@@ -24,6 +24,8 @@ app.get('/health', async (req, res) => {
   res.send("Backend is alive")
 })
 
+app.options('*', cors())
+
 app.use(
   jwt({
     secret: jwksRsa.expressJwtSecret({
