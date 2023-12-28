@@ -62,8 +62,11 @@ Update `variables.tf` in repo `cloudmessage-infra` for the variable `CUSTOMER_CL
 Backend uses Auth0 for authentication. See the Frontend section for setting up Auth0.
 
 In repo `cloudmessage-backend`, set following variables in file `.env`:
-* AUTH0_AUDIENCE
-* AUTH0_ISSUER_BASE_URL
+* AUTH0_AUDIENCE - for Auth0 authentication
+* AUTH0_ISSUER_BASE_URL - for Auth0 authentication
+* DB_URL - url for hosted Postgres database
+* INSTANCE_MQ_URL - url for hosted RabbitMQ instance
+
 
 #### Deploy Backend
 
