@@ -17,6 +17,13 @@ consists of the following repositories:
 The first three repositories contain the application code, the last two contain terraform code
 for deploying backend and create-customer-inst respectively.
 
+#### Technologies used
+
+* Frontend: React
+* Backend: Node, express
+* Database: SQLite (development), Postgres (production)
+* Inter-service messaging: RabbitMQ
+
 #### AWS accounts
 
 The application uses two AWS accounts:
