@@ -37,6 +37,8 @@ At the moment, the application creates customer rabbitmq instance on AWS in regi
 Besides AWS, additional services used are:
 * Auth0 for authentication
 * Netlify for hosting Frontend
+* ElephantSQL for hosted Postgres
+* CloudAMQP for hosted RabbitMQ
 * A web domain for use with application backend API
 
 
