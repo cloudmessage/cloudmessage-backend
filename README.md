@@ -25,6 +25,13 @@ The application uses two AWS accounts:
 
 At the moment, the application creates customer rabbitmq instance on AWS in region us-west-2. In the future, additional regions may be supported or even other cloud providers.
 
+#### Additional Requirements / Services Used
+
+Besides AWS, additional services used are:
+* Auth0 for authentication
+* Netlify for hosting Frontend
+* A web domain for use with application backend API
+
 
 ### Deploy create-customer-inst service
 
