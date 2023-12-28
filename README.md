@@ -55,11 +55,19 @@ Using AWS console, locate and save public ip address of the container within the
 Update `variables.tf` in repo `cloudmessage-infra` for the variable `CUSTOMER_CLUSTER_URL`.
 
 
-### Deploy backend
+### Backend
+
+#### Backend Overview
+
+Backend uses Auth0 for authentication. See the Frontend section for setting up Auth0.
+
+In repo `cloudmessage-backend`, set following variables in file `.env`:
+* AUTH0_AUDIENCE
+* AUTH0_ISSUER_BASE_URL
+
+#### Deploy Backend
 
 Use the `infra` repo to deploy `cloudmessage-backend`.
-
-#### Set variables
 
 In file `variables.tf`, set values for variables used in the `main.tf` terraform file. Variables
 to be set include:
