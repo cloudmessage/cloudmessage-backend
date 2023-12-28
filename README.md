@@ -38,13 +38,32 @@ Besides AWS, additional services used are:
 Use the `cluster-infra` repo to deploy `create-customer-inst` service.
 
 ```
-terraform apply
+AWS_PROFILE="aws-account2-credential-profile-name" terraform apply
 ```
 
 [Manual step]
 Using AWS console, locate and save public ip address of the container within the ECS service.
 Update `variables.tf` in repo `cloudmessage-infra` for the variable `CUSTOMER_CLUSTER_URL`.
 
+
 ### Deploy backend
+
+Use the `infra` repo to deploy `cloudmessage-backend`.
+
+#### Set variables
+
+In file `variables.tf`, set values for variables used in the `main.tf` terraform file. Variables
+to be set include:
+
+* BACKEND_DOMAIN_NAME
+
+
+```
+AWS_PROFILE="aws-account1-credential-profile-name" terraform apply
+```
+
+#### Set variable values
+
+
 
 ### Deploy frontend
