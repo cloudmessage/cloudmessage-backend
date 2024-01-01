@@ -91,8 +91,51 @@ AWS_PROFILE="aws-account1-credential-profile-name" terraform apply
 
 ## Running locally
 
+For running the project locally, following five items need to be run:
+* Instance RabbitMQ container
+* Customer instances RabbitMQ container
+* Create customer request service
+* Backend
+* Frontend
+
+At least three terminal windows are needed to run: (1) customer request service,
+(2) backend, (3) frontend. The two containers run in background, but it is useful
+to look at the container logs, so two additional terminal windows are needed to
+follow the container logs.
+
 ### Run instance RabbitMQ container
+
+The `package.json` file in repo `cloudmessage-backend` contains a script to start the instance
+RabbitMQ container. After navigating to `cloudmessage-backend` repo's root directory, running
+the following command will start the container:
+
+```
+npm run dev:start_instance_queue
+```
+
+After the container start, the container logs can be monitered as follows:
+
+```
+docker logs --follow <container-id>
+```
+
+
 ### Run customer instances RabbitMQ container
+
+Navigate to repo `create-customer-inst` repo's root directory. Run the following command to
+start customer instances container:
+
+```
+npm run dev:start-cust-rabbit-container
+```
+
+Follow logs using:
+
+```
+docker logs --follow <container-id>
+```
+
+
 ### Run create customer request service
 ### Run backend
 ### Run frontend
