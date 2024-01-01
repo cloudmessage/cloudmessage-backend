@@ -122,7 +122,7 @@ docker logs --follow <container-id>
 
 ### Run customer instances RabbitMQ container
 
-Navigate to repo `create-customer-inst` repo's root directory. Run the following command to
+Navigate to `create-customer-inst` repo's root directory. Run the following command to
 start customer instances container:
 
 ```
@@ -137,5 +137,27 @@ docker logs --follow <container-id>
 
 
 ### Run create customer request service
+
+Navigate to repo `create-customer-inst`. Run the following command:
+
+```
+npm run start
+```
+
+
 ### Run backend
+
+Naviagate to repo `cloudmessage-backend`. Run the following command:
+
+```
+npm run start
+```
+
+
 ### Run frontend
+
+Naviagate to repo `cloudmessage-frontend`. Run the following command:
+
+```
+npm run start
+```
