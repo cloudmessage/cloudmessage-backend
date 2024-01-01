@@ -87,3 +87,12 @@ AWS_PROFILE="aws-account1-credential-profile-name" terraform apply
 
 
 ### Deploy frontend
+
+
+## Running locally
+
+### Run instance RabbitMQ container
+### Run customer instances RabbitMQ container
+### Run create customer request service
+### Run backend
+### Run frontend
