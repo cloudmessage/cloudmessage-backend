@@ -154,7 +154,7 @@ INSTANCE_MQ_URL=amqp://localhost:10001/
 CUSTOMER_CLUSTER_URL=http://localhost
 ```
 
-Run the following command:
+After creating the `.env` file, run the following command:
 
 ```
 npm run start
@@ -163,7 +163,19 @@ npm run start
 
 ### Run backend
 
-Naviagate to repo `cloudmessage-backend`. Run the following command:
+Naviagate to repo `cloudmessage-backend`. Create `.env` file, add two environment variables
+required for Auth0 authentication: `AUTH0_AUDIENCE` and `AUTH0_ISSUER_BASE_URL`. In addition,
+set variable `INSTANCE_MQ_URL` to url where the backend will send instance requests.
+
+The `.env` would look as follows:
+
+```
+AUTH0_AUDIENCE=https://cloudmessage.com
+AUTH0_ISSUER_BASE_URL=https://cloudmessage.us.auth0.com
+INSTANCE_MQ_URL=amqp://localhost:10001/
+```
+
+After creating the `.env` file, run the following command:
 
 ```
 npm run start
