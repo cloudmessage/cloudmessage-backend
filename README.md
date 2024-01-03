@@ -1,9 +1,9 @@
 # Cloudmessage backend
 
-## Application deployment
+## Application Deployment
 
 
-### Overview
+### Deployment Overview
 
 This guide describes how to deploy the entire cloudmessage application. The application
 consists of the following repositories:
@@ -17,14 +17,14 @@ consists of the following repositories:
 The first three repositories contain the application code, the last two contain terraform code
 for deploying backend and create-customer-inst respectively.
 
-#### Technologies used
+#### Technologies Used
 
 * Frontend: React
 * Backend: Node, express
 * Database: SQLite (development), Postgres (production)
 * Inter-service messaging: RabbitMQ
 
-#### AWS accounts
+#### AWS Accounts
 
 The application uses two AWS accounts:
 * AWS account 1 - for deploying cloudmessage-backend and create-customer-inst service
@@ -40,6 +40,27 @@ Besides AWS, additional services used are:
 * ElephantSQL for hosted Postgres
 * CloudAMQP for hosted RabbitMQ
 * A web domain for use with application backend API
+
+#### Setup Auth0
+
+The application uses Auth0 for authentication. Login into Auth0 and perform the steps below:
+* create an `Application`, pick application type of `Single Page Web Application`
+* Enter frontend URL in the following fields for setting up the application:
+  * Allowed Callback URLs
+  * Allowed Logout URLs
+  * Allowed Web Origins
+* When entering frontend URLs, enter multiple URLs separated by commas. This is relevant
+when there are separate deployments (such as local development and production deployment).
+For example, typical entries for this application would look like:
+
+    ```
+    http://localhost:3006, https://xxxxxxxx.netlify.app/
+    ```
+* Information from Auth0 application is needed to be set as environment variables in frontend
+as well as backend repos. Some of the information required includes:
+  * Audience
+  * Domain
+  * Client Id
 
 
 ### Deploy create-customer-inst service
