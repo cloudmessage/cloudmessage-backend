@@ -138,7 +138,23 @@ docker logs --follow <container-id>
 
 ### Run create customer request service
 
-Navigate to repo `create-customer-inst`. Run the following command:
+Navigate to repo `create-customer-inst`. Two environment variables are needed for running this service. These variables are set in .env file. Set variable `INSTANCE_MQ_URL`
+to url where instance requests are queued by the backend service. This url would
+access RabbitMQ instance running in the container launched in the
+`Run instance RabbitMQ container` section above.
+
+The second environment variable needed is `CUSTOMER_CLUSTER_URL`. Set this variable
+to RabbitMQ instance where customer instances will be created, which is the container
+launched in the `Run customer instances RabbitMQ container` section.
+
+The `.env` would look as follows:
+
+```
+INSTANCE_MQ_URL=amqp://localhost:10001/
+CUSTOMER_CLUSTER_URL=http://localhost
+```
+
+Run the following command:
 
 ```
 npm run start
