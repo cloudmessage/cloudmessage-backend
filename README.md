@@ -88,6 +88,29 @@ AWS_PROFILE="aws-account1-credential-profile-name" terraform apply
 
 ### Deploy frontend
 
+Frontend is deployed using Netlify. Netlify's free `Starter` plan is sufficient for our
+purpose. Steps involved in deploying frontend to Netlify are:
+
+* create a `Site`. Pick the option of importing an existing project and pick integrate
+with git
+* after creating the site, Netlify assigns a url for the deployment that looks like
+`https://xxxxxxxx.netlify.app`
+* Get info from Auth0 and set environment variables within `Site configuration` on the Netlify site. Prefix each variable with REACT_APP. Following variables are set:
+  * REACT_APP_AUTH0_AUDIENCE
+  * REACT_APP_AUTH0_CLIENT_ID
+  * REACT_APP_AUTH0_DOMAIN
+  * REACT_APP_AUTH0_REDIRECT_URI
+* we need to tell frontend the url for our backend API. After backend is deployed, set
+backend's url as a variable as shown below. It is recommended to purchase a domain for
+use with backend.
+  * REACT_APP_CLOUDMESSAGE_API_URL
+
+* Get deployment url for the site from Netlify and add the url to the following sections
+on Auth0:
+  * Allowed Callback URLs
+  * Allowed Logout URLs
+  * Allowed Web Origins
+
 
 ## Running locally
 
