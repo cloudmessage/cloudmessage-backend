@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev:start_instance_queue": "docker run -d --hostname create_inst_rabbit --name inst_rabbit -p 10001:5672 -p 10002:15672 rabbitmq:3-management"
+    "dev:start_instance_queue": "docker run -d --hostname create_inst_rabbit --name inst_rabbit -p 10001:5672 -p 10002:15672 rabbitmq:3-management",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
