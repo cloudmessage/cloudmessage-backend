@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node app.js",
     "dev:start_instance_queue": "docker run -d --hostname create_inst_rabbit --name inst_rabbit -p 10001:5672 -p 10002:15672 rabbitmq:3-management",
     "test": "jest"
   },
@@ -26,5 +26,6 @@
     "jest": "^29.7.0",
     "sqlite3": "^5.1.6",
     "supertest": "^6.3.3"
-  }
+  },
+  "type": "module"
 }
