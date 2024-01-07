@@ -1,11 +1,14 @@
 import { Router } from 'express';
 import kenxEnvOptions from './knexoptions.js';
 import sendToCreateInstanceQueue from './rabbit.js';
+import knexLib from 'knex';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const router = Router();
-const knexOptions = kenxEnvOptions[process.env.NODE_ENV]
+const knexEnv = kenxEnvOptions[process.env.NODE_ENV];
 
-// const knex = require('knex')(knexOptions)
+const knex = knexLib(knexEnv);
 router.post('/instances', async (req, res) => {
   const instanceName = req.body.instanceName
   const instance = {
