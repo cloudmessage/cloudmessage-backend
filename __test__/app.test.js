@@ -1,4 +1,4 @@
-const server = require('../index');
+import server from '../app.js';
 const supertest = require('supertest');
 const requestWithSuperTest = supertest(server);
 
