@@ -1,4 +1,4 @@
-module.exports = {
+const kenxEnvOptions = {
   development: {
     client: 'sqlite3',
     connection: {
@@ -11,3 +11,5 @@ module.exports = {
     connection: process.env.DB_URL
   }
 }
+
+export default kenxEnvOptions;

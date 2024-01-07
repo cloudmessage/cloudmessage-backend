@@ -1,4 +1,5 @@
-const amqp = require('amqplib/callback_api')
+import * as amqplib from 'amqplib';
+const amqp = amqplib.callbackapi;
 
 function sendToCreateInstanceQueue(instanceId) {
   amqp.connect(process.env.INSTANCE_MQ_URL, function(error0, connection) {
@@ -27,4 +28,4 @@ function sendToCreateInstanceQueue(instanceId) {
   })  
 }
 
-module.exports = sendToCreateInstanceQueue
+export default sendToCreateInstanceQueue;
