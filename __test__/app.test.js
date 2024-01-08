@@ -1,7 +1,6 @@
 import request from 'supertest';
 import app from '../app';
 
-
 describe('Instance endpoints', () => {
 
   it('GET /instances should get all instances', async () => {
