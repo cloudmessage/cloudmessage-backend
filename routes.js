@@ -50,4 +50,4 @@ router.get('/instances/:inst_id', async (req, res) => {
     .catch((err) => { console.log(err); throw err })
 })
 
-export { router, knex };
+export default router;

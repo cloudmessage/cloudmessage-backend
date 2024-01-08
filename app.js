@@ -1,17 +1,17 @@
 import router from './routes.js';
 import express from 'express';
-import auth from 'express-oauth2-jwt-bearer';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import { expressjwt as jwt} from 'express-jwt';
 import jwksRsa from 'jwks-rsa';
-const port = 3000;
+const port = process.env.PORT || 3000;
 dotenv.config();
 
 const AUTH0_AUDIENCE = process.env.AUTH0_AUDIENCE;
 const AUTH0_ISSUER_BASE_URL = process.env.AUTH0_ISSUER_BASE_URL;
 
 const app = express();
+app.set("port", port);
 
 app.use(express.json())
 app.use(cors())
@@ -47,6 +47,4 @@ app.use(
 
 app.use('/', router);
 
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`)
-})
+export default app;
