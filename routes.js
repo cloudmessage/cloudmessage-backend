@@ -3,13 +3,20 @@ import kenxEnvOptions from './knexoptions.js';
 import sendToCreateInstanceQueue from './rabbit.js';
 import knexLib from 'knex';
 import dotenv from 'dotenv';
+import authorize from './authorization.js';
 
 dotenv.config();
 const router = Router();
 const knexEnv = kenxEnvOptions[process.env.NODE_ENV];
 
 const knex = knexLib(knexEnv);
-router.post('/instances', async (req, res) => {
+
+router.get('/health', async (req, res) => {
+  res.status(200)
+  res.send("Backend is alive")
+});
+
+router.post('/instances', authorize, async (req, res) => {
   const instanceName = req.body.instanceName
   const instance = {
     name: instanceName
@@ -28,7 +35,7 @@ router.post('/instances', async (req, res) => {
 
 })
 
-router.get('/instances', async (req, res) => {
+router.get('/instances', authorize, async (req, res) => {
   knex('instances').select('id', 'name')
     .orderBy('id')
     .then((rows) => {
@@ -37,7 +44,7 @@ router.get('/instances', async (req, res) => {
     .catch((err) => { console.log(err); throw err })
 })
 
-router.get('/instances/:inst_id', async (req, res) => {
+router.get('/instances/:inst_id', authorize, async (req, res) => {
   knex('instances').select('id', 'name', 'user', 'virtual_host', 'password', 'hostname')
     .where('id', req.params.inst_id)
     .then((rows) => {
