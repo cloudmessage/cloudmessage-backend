@@ -27,7 +27,6 @@ const postInstances = async (req, res) => {
 };
 
 const getInstances = async (req, res) => {
-
   try {
     const rows = await req.dataService.getInstances();
     res.send(rows);

@@ -6,8 +6,6 @@ const router = Router();
 router.get('/health', getHealth);
 router.post('/instances', postInstances);
 router.get('/instances', getInstances);
-router.get('/instances/:inst_id', async (req, res) => {
-  return getOneInstance(req.params.inst_id);
-});
+router.get('/instances/:inst_id', getOneInstance);
 
 export default router;
