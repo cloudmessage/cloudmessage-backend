@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import kenxEnvOptions from './knexoptions.js';
 import sendToCreateInstanceQueue from './rabbit.js';
-import knexLib from 'knex';
+import Knex from 'knex';
 import dotenv from 'dotenv';
 import authorize from './authorization.js';
 
@@ -9,7 +9,7 @@ dotenv.config();
 const router = Router();
 const knexEnv = kenxEnvOptions[process.env.NODE_ENV];
 
-const knex = knexLib(knexEnv);
+const knex = Knex(knexEnv);
 
 router.get('/health', async (req, res) => {
   res.status(200)
