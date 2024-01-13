@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev:start_instance_queue": "docker run -d --hostname create_inst_rabbit --name inst_rabbit -p 10001:5672 -p 10002:15672 rabbitmq:3-management",
-    "test": "NODE_ENV=development NODE_OPTIONS=--experimental-vm-modules jest --runInBand --detectOpenHandles --forceExit"
+    "test": "NODE_ENV=development NODE_OPTIONS=--experimental-vm-modules jest --runInBand --detectOpenHandles --forceExit",
+    "test:mocha": "mocha"
   },
   "keywords": [],
   "author": "",
@@ -23,8 +24,14 @@
     "pg": "^8.11.3"
   },
   "devDependencies": {
+    "@babel/core": "^7.23.7",
+    "@babel/preset-env": "^7.23.8",
+    "@babel/register": "^7.23.7",
+    "chai": "^5.0.0",
     "jest": "^29.7.0",
     "jest-mock": "^29.7.0",
+    "mocha": "^10.2.0",
+    "regenerator-runtime": "^0.14.1",
     "sqlite3": "^5.1.6",
     "supertest": "^6.3.3"
   },
