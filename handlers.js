@@ -12,7 +12,7 @@ const postInstances = async (req, res) => {
   }
 
   try {
-    const instanceIdArr = await req.dataService.postInstances(instance);
+    const instanceIdArr = await req.dataService.postInstances(instance, req.knex);
     const instanceId = instanceIdArr[0].id;
 
     // append task to queue
@@ -28,7 +28,7 @@ const postInstances = async (req, res) => {
 
 const getInstances = async (req, res) => {
   try {
-    const rows = await req.dataService.getInstances();
+    const rows = await req.dataService.getInstances(req.knex);
     res.send(rows);
   } catch (err) {
     console.error(err);
@@ -38,7 +38,7 @@ const getInstances = async (req, res) => {
 
 const getOneInstance = async (req, res) => {
   try {
-    const rows = await req.dataService.getOneInstance(req.params.inst_id);
+    const rows = await req.dataService.getOneInstance(req.params.inst_id, req.knex);
     if (rows.length === 0) {
       res.status(404).send({ msg: "Not found" })
     }
