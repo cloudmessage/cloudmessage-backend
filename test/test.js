@@ -44,6 +44,7 @@ describe('Instance routes', () => {
     const res = await request(app).get('/instances');
     expect(res.status).to.equal(200);
     expect(res.body).to.have.length(2);
+    expect(res.body[0]).to.deep.equal({id: 10, name: "instance10"})
   });
 
 });
