@@ -2,11 +2,18 @@
 import request from 'supertest';
 import express from 'express';
 import { expect } from 'chai';
-import router from '../routes.js';
+import getRouter from '../routes.js';
+import sinon from 'sinon';
 
 describe('getHealth route', () => {
 
   const app = express();
+
+  const mockAuthorize = function(req, res, next) {
+    next();
+  };
+
+  const router = getRouter(mockAuthorize);
 
   app.use('/', router);
 

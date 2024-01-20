@@ -3,12 +3,18 @@ import request from 'supertest';
 import app from '../app.js';
 import express from 'express';
 import { expect } from 'chai';
-import Knex from 'knex';
-import router from '../routes.js';
+import getRouter from '../routes.js';
 import { postInstances, getInstances, getOneInstance } from '../data.js';
 import sinon from 'sinon';
 
 describe('getInstances/<id> route', () => {
+
+  const app = express();
+  const mockAuthorize = function(req, res, next) {
+    next();
+  };
+
+  const router = getRouter(mockAuthorize);
 
   const returnValue = [
     {id: 10, name: "instance10"},
@@ -24,7 +30,7 @@ describe('getInstances/<id> route', () => {
       where: whereStub
     }
   })
-  const app = express();
+
   const dataService = () => {
     return Object.freeze({
       postInstances,
