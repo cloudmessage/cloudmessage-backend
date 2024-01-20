@@ -1,10 +1,12 @@
-import router from './routes.js';
+import authorize from './authorization.js';
+import getRouter from './routes.js';
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import { postInstances, getInstances, getOneInstance } from './data.js';
 import getKnexObj from './knexObj.js';
 
+const router = getRouter(authorize);
 const knex = getKnexObj();
 const port = process.env.PORT || 3000;
 dotenv.config();
