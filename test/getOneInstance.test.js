@@ -1,6 +1,5 @@
 
 import request from 'supertest';
-import app from '../app.js';
 import express from 'express';
 import { expect } from 'chai';
 import getRouter from '../routes.js';
