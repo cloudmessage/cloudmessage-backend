@@ -28,5 +28,4 @@ const sendToCreateInstanceQueue = async (instanceId) => {
   })
 }
 
-// export default sendToCreateInstanceQueue;
 export default { sendToCreateInstanceQueue };
