@@ -5,9 +5,9 @@ import { expect } from 'chai';
 import getRouter from '../routes.js';
 import { postInstances, getInstances, getOneInstance } from '../data.js';
 import sinon from 'sinon';
+import instanceQueue from '../instanceQueue.js';
 
 describe('postInstances route', () => {
-
   const app = express();
   const mockAuthorize = function(req, res, next) {
     next();
@@ -15,18 +15,16 @@ describe('postInstances route', () => {
 
   const router = getRouter(mockAuthorize);
 
-  const returnValue = [
-    {id: 10, name: "instance10"},
-    {id: 20, name: "instance20"}
-  ];
-  const expectedValue = {id: 10, name: "instance10"};
-  const selectStub = sinon.stub().returnsThis();
-  const whereStub = sinon.stub().resolves(returnValue);
+  const returnInstanceId = 10;
+  const returnValue = [{id: returnInstanceId}];
+  const expectedValue = returnInstanceId;
+  const insertStub = sinon.stub().returnsThis();
+  const returningStub = sinon.stub().resolves(returnValue);
 
   const knexStub = sinon.stub().callsFake(() => {
     return {
-      select: selectStub,
-      where: whereStub
+      insert: insertStub,
+      returning: returningStub
     }
   })
 
@@ -44,13 +42,16 @@ describe('postInstances route', () => {
     next();
   }
 
+  const instanceQueueStub = sinon.stub(instanceQueue, 'sendToCreateInstanceQueue').resolves();
+
+  app.use(express.json());
   app.use('/', exposeDataService, router);
 
-  it('router post /snstances should call correct handler with expect request', async () => {
-    app.use('/', exposeDataService, router);
-    const res = await request(app).post('/instances/10');
+  it('router post /snstances should return expected value', async () => {
+    const res = await request(app).post('/instances', {instanceName: "aaa"});
     expect(res.status).to.equal(200);
-    expect(res.body).to.deep.equal({id: 10, name: "instance10"})
+    expect(res.body).to.deep.equal({msg: 'createInstance request received'});
+    expect(instanceQueueStub.calledWith(expectedValue)).to.be.ok;
   });
 
 });
