@@ -47,8 +47,8 @@ describe('postInstances route', () => {
   app.use(express.json());
   app.use('/', exposeDataService, router);
 
-  it('router post /snstances should return expected value', async () => {
-    const res = await request(app).post('/instances', {instanceName: "aaa"});
+  it('router post /instances should return expected value', async () => {
+    const res = await request(app).post('/instances', {instanceName: "someInstance"});
     expect(res.status).to.equal(200);
     expect(res.body).to.deep.equal({msg: 'createInstance request received'});
     expect(instanceQueueStub.calledWith(expectedValue)).to.be.ok;
