@@ -1,4 +1,4 @@
-import sendToCreateInstanceQueue from './rabbit.js';
+import instanceQueue from './instanceQueue.js';
 
 const getHealth = async (req, res) => {
   res.status(200)
@@ -17,7 +17,7 @@ const postInstances = async (req, res) => {
 
     // append task to queue
     console.log("instanceId returned=", instanceId);
-    sendToCreateInstanceQueue(instanceId);
+    instanceQueue.sendToCreateInstanceQueue(instanceId);
 
     res.send({ msg: 'createInstance request received' })
   } catch (err) {

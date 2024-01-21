@@ -1,8 +1,8 @@
 import * as amqplib from 'amqplib';
 const amqp = amqplib.callbackapi;
 
-function sendToCreateInstanceQueue(instanceId) {
-  amqp.connect(process.env.INSTANCE_MQ_URL, function(error0, connection) {
+const sendToCreateInstanceQueue = async (instanceId) => {
+  amqp.connect(process.env.INSTANCE_MQ_URL, async (error0, connection) => {
     if (error0) {
       throw error0
     }
@@ -25,7 +25,8 @@ function sendToCreateInstanceQueue(instanceId) {
     setTimeout(function() {
       connection.close()
     }, 500)
-  })  
+  })
 }
 
-export default sendToCreateInstanceQueue;
+// export default sendToCreateInstanceQueue;
+export default { sendToCreateInstanceQueue };
