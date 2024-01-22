@@ -17,7 +17,7 @@ const postInstances = async (req, res) => {
 
     // append task to queue
     console.log("instanceId returned=", instanceId);
-    instanceQueue.sendToCreateInstanceQueue(instanceId);
+    await instanceQueue.sendToCreateInstanceQueue(instanceId);
 
     res.send({ msg: 'createInstance request received' })
   } catch (err) {
