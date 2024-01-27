@@ -1,4 +1,4 @@
-const kenxEnvOptions = {
+const knexEnvOptions = {
   development: {
     client: 'sqlite3',
     connection: {
@@ -12,4 +12,4 @@ const kenxEnvOptions = {
   }
 }
 
-export default kenxEnvOptions;
+export default knexEnvOptions;
