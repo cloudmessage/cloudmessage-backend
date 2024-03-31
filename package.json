@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server.js",
     "dev:start_instance_queue": "docker run -d --hostname create_inst_rabbit --name inst_rabbit -p 10001:5672 -p 10002:15672 rabbitmq:3-management",
-    "test": "mocha"
+    "test": "mocha",
+    "migrations-run": "knex migrate:latest --knexfile knexoptions.js"
   },
   "keywords": [],
   "author": "",
