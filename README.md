@@ -89,6 +89,34 @@ In repo `cloudmessage-backend`, set following variables in file `.env`:
 * INSTANCE_MQ_URL - url for hosted RabbitMQ instance
 
 
+#### Migrations
+
+The steps for using migrations is as follonws:
+* Initialize knex or create knexfile manually (we create the file manually for this project)
+* Create migrations
+* Run migrations
+
+
+##### Create knexfile
+We create a file called `knexoptions.js` in our root folder. This is what is referred to as *knexfile* in `knex` documentation.
+
+
+##### Create migrations
+
+Create migration files using the following command, we have to pass-in the `--file` option since we do not use the default knexfile name:
+
+```
+npx knex migrate:make --file knexoptions.js create_table --env development
+
+npx knex migrate:make --file knexoptions.js create_table --env production
+```
+
+##### Run migrations
+
+```
+npx knex migrate:latest --knexfile knexoptions.js
+```
+
 #### Deploy Backend
 
 Use the `infra` repo to deploy `cloudmessage-backend`.
