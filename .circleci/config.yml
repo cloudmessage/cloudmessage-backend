@@ -5,6 +5,7 @@ jobs:
     docker:
       - image: cimg/node:18.19.0
     steps:
+      - checkout
       - run: npm install --legacy-peer-deps
 
 workflows:
