@@ -8,6 +8,7 @@ jobs:
       - checkout
       - run: npm install --legacy-peer-deps
       - run: npm test
+      - run: npm test
 
 workflows:
   build_test_deploy:
