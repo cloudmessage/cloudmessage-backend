@@ -12,6 +12,7 @@ workflows:
   build_test_deploy:
     jobs:
       - build
-      filters:
+        filters:
           branches:
-            only: main
+            only:
+              - main
