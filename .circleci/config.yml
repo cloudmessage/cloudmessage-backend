@@ -15,4 +15,5 @@ workflows:
       - build_and_test:
         filters:
           branches:
-            only: main
+            only:
+              - main
