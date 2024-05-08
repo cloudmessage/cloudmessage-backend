@@ -1,0 +1,13 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: img/base:2022.05
+    steps:
+      - run: npm install --legacy-peer-deps
+
+workflows:
+  build_test_deploy:
+    jobs:
+      - build
