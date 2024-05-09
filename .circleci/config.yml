@@ -1,6 +1,7 @@
 version: 2.1
 
 orbs:
+  aws-cli: circleci/aws-cli@4.0
   aws-ecr: circleci/aws-ecr@9.1.0
 
 jobs:
@@ -18,6 +19,8 @@ jobs:
       - setup_remote_docker
       - aws-ecr/build_and_push_image:
           dockerfile: Dockerfile
+          auth:
+            - aws-cli/setup
           repo: clmsg-backend
           tag: "0.1"
 
