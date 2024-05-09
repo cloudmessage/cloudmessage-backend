@@ -12,6 +12,8 @@ jobs:
       - run: npm install --legacy-peer-deps
       - run: npm test
   push_to_registry:
+    docker:
+      - image: cimg/base:stable
     steps:
       - aws-ecr/build-and-push-image:
           dockerfile: Dockerfile
