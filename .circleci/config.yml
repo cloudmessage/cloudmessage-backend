@@ -20,7 +20,9 @@ jobs:
       - aws-ecr/build_and_push_image:
           dockerfile: Dockerfile
           auth:
-            - aws-cli/setup
+            - aws-cli/setup:
+                aws-access-key-id: ${AWS_ACCESS_KEY_ID}
+                aws-region: ${AWS_REGION}
           repo: clmsg-backend
           tag: "0.1"
 
