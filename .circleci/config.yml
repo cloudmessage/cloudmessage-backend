@@ -21,8 +21,8 @@ jobs:
           dockerfile: Dockerfile
           auth:
             - aws-cli/setup:
-                aws-access-key-id: ${AWS_ACCESS_KEY_ID}
-                aws-region: ${AWS_REGION}
+                aws_access_key_idid: ${AWS_ACCESS_KEY_ID}
+                region: ${AWS_REGION}
           repo: clmsg-backend
           tag: "0.1"
 
