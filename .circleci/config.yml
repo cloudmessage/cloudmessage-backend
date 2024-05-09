@@ -17,7 +17,7 @@ jobs:
     steps:
       - setup_remote_docker:
           version: 20.10.11
-      - aws-ecr/build-and-push-image:
+      - aws-ecr/build_and_push_image:
           dockerfile: Dockerfile
           repo: clmsg-backend
           tag: 0.1
