@@ -16,7 +16,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - setup_remote_docker
-      - aws-ecr/build-and-push-image:
+      - aws-ecr/build_and_push_image:
           dockerfile: Dockerfile
           repo: clmsg-backend
           tag: "0.1"
