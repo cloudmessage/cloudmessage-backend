@@ -12,11 +12,11 @@ jobs:
       - run: npm install --legacy-peer-deps
       - run: npm test
   push_to_registry:
-    docker:
-      - image: cimg/base:stable
+    # docker:
+    #   - image: cimg/base:stable
     steps:
-      - setup_remote_docker:
-          version: 20.10.11
+      # - setup_remote_docker:
+          # version: 20.10.11
       - aws-ecr/build-and-push-image:
           dockerfile: Dockerfile
           repo: clmsg-backend
