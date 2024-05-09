@@ -20,7 +20,7 @@ jobs:
       - aws-ecr/build_and_push_image:
           dockerfile: Dockerfile
           repo: clmsg-backend
-          tag: 0.1
+          tag: "0.1"
 
 workflows:
   build_test_deploy:
