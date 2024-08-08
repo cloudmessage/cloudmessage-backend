@@ -73,24 +73,23 @@ AWS_PROFILE="aws-account2-credential-profile-name" terraform apply
 
 [Manual step]
 Using AWS console, locate and save public ip address of the container within the ECS service.
-Update `variables.tf` in repo `cloudmessage-infra` for the variable `CUSTOMER_CLUSTER_URL`.
+This value will be used when deploying backend as described below.
 
 
-### Backend
-
-#### Backend Overview
+### Backend Overview
 
 Backend uses Auth0 for authentication. See the Frontend section for setting up Auth0.
 
 In repo `cloudmessage-backend`, set following variables in file `.env`:
 * AUTH0_AUDIENCE - for Auth0 authentication
 * AUTH0_ISSUER_BASE_URL - for Auth0 authentication
+* NODE_ENV - set to `production`
 * DB_URL - url for hosted Postgres database
 * INSTANCE_MQ_URL - url for hosted RabbitMQ instance
 * INSTANCES_TABLE_NAME - table name used for storing instances information, suggested value `instances`
 
 
-#### Migrations
+### Migrations
 
 The steps for using migrations is as follonws:
 * Initialize knex or create knexfile manually (we create the file manually for this project)
@@ -118,23 +117,42 @@ npx knex migrate:make --file knexoptions.js create_table --env production
 npx knex migrate:latest --knexfile knexoptions.js
 ```
 
-#### Deploy Backend
+### Deploy Backend
+
+Use the `infra` repo to deploy `cloudmessage-backend`. Run steps outlined the following two sections:
+
+* Set variable values
+* Run deployment terraform
+
+#### Set variable values
+
+In the `infra` repo, copy `variables.tf.example` to `variables.tf` and set variable values in the `variables.tf` file.
+
+Set the values of following variables to same values as those set in backend section above:
+
+* AUTH0_AUDIENCE
+* AUTH0_ISSUER_BASE_URL
+* NODE_ENV
+* DB_URL
+* INSTANCE_MQ_URL
+* INSTANCES_TABLE_NAME
+
+In addition, set the value of the following two variables to value of the backend domain name. We need
+to own a domain name:
+
+* BACKEND_DOMAIN_NAME - set the domain name to which backend will be deployed
+* CUSTOMER_CLUSTER_URL - set to IP address of customer cluster (use the value that is output by the script during create-customer-inst service above)
+
+
+
+
+#### Run deployment terraform
 
 Use the `infra` repo to deploy `cloudmessage-backend`.
-
-In file `variables.tf`, set values for variables used in the `main.tf` terraform file. Variables
-to be set include:
-
-* BACKEND_DOMAIN_NAME
-
 
 ```
 AWS_PROFILE="aws-account1-credential-profile-name" terraform apply
 ```
-
-#### Set variable values
-
-
 
 ### Deploy frontend
 
