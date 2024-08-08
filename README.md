@@ -128,6 +128,10 @@ Use the `infra` repo to deploy `cloudmessage-backend`. Run steps outlined the fo
 
 In the `infra` repo, copy `variables.tf.example` to `variables.tf` and set variable values in the `variables.tf` file.
 
+```
+cp variables.tf.example variables.tf
+```
+
 Set the values of following variables to same values as those set in backend section above:
 
 * AUTH0_AUDIENCE
