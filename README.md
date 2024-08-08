@@ -87,6 +87,7 @@ In repo `cloudmessage-backend`, set following variables in file `.env`:
 * AUTH0_ISSUER_BASE_URL - for Auth0 authentication
 * DB_URL - url for hosted Postgres database
 * INSTANCE_MQ_URL - url for hosted RabbitMQ instance
+* INSTANCES_TABLE_NAME - table name used for storing instances information, suggested value `instances`
 
 
 #### Migrations
