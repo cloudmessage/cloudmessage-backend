@@ -145,7 +145,7 @@ In addition, set the value of the following two variables to value of the backen
 to own a domain name:
 
 * BACKEND_DOMAIN_NAME - set the domain name to which backend will be deployed
-* CUSTOMER_CLUSTER_URL - set to IP address of customer cluster (use the value that is output by the script during create-customer-inst service above)
+* CUSTOMER_CLUSTER_URL - set to IP address of customer cluster (use the value that is output by the script during create-customer-inst service above). Prefix the IP address with `http://`.
 
 
 
