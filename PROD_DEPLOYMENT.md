@@ -25,7 +25,10 @@ Use the `cluster-infra` repo to deploy `create-customer-inst` service.
 AWS_PROFILE="aws-account2-credential-profile-name" terraform apply
 ```
 
-[Manual step]
+## Get customer cluster container's IP address
+
+**NOTE:** We need to figure out how to extract IP address of the container for create customer cluster. This is less than ideal, as the IP address will change every time the container is recreated. A better solution is to create a load balancer and use load balancer url. The best solution would be to purchase a domain and attach it to the service.
+
 Using AWS console, locate and save public ip address of the container within the ECS service.
 This value will be used when deploying backend as described below.
 
